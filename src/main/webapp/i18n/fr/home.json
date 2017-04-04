@@ -1,0 +1,9 @@
+{
+    "home": {
+        "title": "CRA",
+        "subtitle": "Page d'accueil",
+        "logged": {
+            "message": "Vous êtes connecté en tant que \"{{username}}\"."
+        }
+    }
+}
