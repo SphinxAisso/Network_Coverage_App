@@ -35,6 +35,9 @@ public class AbsenceResource {
 
     @PostMapping("/absence")
     public ResponseEntity createUser(@RequestBody AbsenceDTO absenceDTO) throws URISyntaxException {
-
+        Absence newAbsence = absenceService.createAbsence(absenceDTO);
+        return ResponseEntity.created(new URI(PREFIX + newAbsence.getAbsenceType()))
+            .headers(HeaderUtil.createAlert("absenceManagement.created", newAbsence.getAbsenceType().toString()))
+            .body(newAbsence);
     }
 }
