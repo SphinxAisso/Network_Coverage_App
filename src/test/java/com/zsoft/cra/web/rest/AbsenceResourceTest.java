@@ -24,6 +24,7 @@ import java.util.List;
 
 import static com.zsoft.cra.domain.AbsenceType.UNJUSTIFIED_ABSENCE;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -72,6 +73,7 @@ public class AbsenceResourceTest {
             .setControllerAdvice(exceptionTranslator)
             .setMessageConverters(jacksonMessageConverter)
             .build();
+
     }
 
     @Test
@@ -102,6 +104,17 @@ public class AbsenceResourceTest {
         assertThat(testAbsence.getEndingDate()).isEqualTo(date.plus(1, ChronoUnit.DAYS));
         assertThat(testAbsence.getComment()).isEqualTo(COMMENT);
         assertThat(testAbsence.getUser().getLogin()).isEqualTo(USER_LOGIN);
+    }
+
+    @Test
+    public void getAbsences() throws Exception {
+
+        restAbsenceCLientMockMvc.perform(get("/api/absences")
+            .param("userLogin", USER_LOGIN)
+            .contentType(TestUtil.APPLICATION_JSON_UTF8))
+            .andExpect(status().isOk());
+
+
     }
 
 }
