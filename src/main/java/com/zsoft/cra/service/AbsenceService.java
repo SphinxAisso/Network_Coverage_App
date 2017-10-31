@@ -4,7 +4,6 @@ import com.zsoft.cra.domain.Absence;
 import com.zsoft.cra.domain.AbsenceType;
 import com.zsoft.cra.domain.User;
 import com.zsoft.cra.repository.AbsenceRepository;
-import com.zsoft.cra.repository.UserRepository;
 import com.zsoft.cra.service.dto.AbsenceDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,10 +20,12 @@ public class AbsenceService {
 
     private final AbsenceRepository absenceRepository;
 
+
     private UserService userService;
 
-    public AbsenceService(AbsenceRepository absenceRepository) {
+    public AbsenceService(AbsenceRepository absenceRepository, UserService userService) {
         this.absenceRepository = absenceRepository;
+        this.userService = userService;
     }
 
     public Absence createAbsence(LocalDate beginingDate, LocalDate endingDate, AbsenceType absenceType, String comment, String userLogin) {
@@ -36,9 +37,8 @@ public class AbsenceService {
         absence.setEndingDate(endingDate);
         absence.setAbsenceType(absenceType);
         absence.setComment(comment);
-        absence.setComment(comment);
 
-
+        // looking for the user
         Optional<User> userOptional = userService.getUserWithAuthoritiesByLogin(userLogin);
         if (userOptional.isPresent()) {
             absence.setUser(userOptional.get());
@@ -51,7 +51,6 @@ public class AbsenceService {
         }
 
     }
-
 
     public Absence createAbsence(AbsenceDTO absenceDTO) {
 
