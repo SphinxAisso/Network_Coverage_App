@@ -2,10 +2,7 @@ package com.zsoft.cra.web.rest;
 
 import com.zsoft.cra.CraApp;
 import com.zsoft.cra.domain.Absence;
-import com.zsoft.cra.domain.AbsenceType;
-import com.zsoft.cra.domain.User;
 import com.zsoft.cra.repository.AbsenceRepository;
-import com.zsoft.cra.repository.UserRepository;
 import com.zsoft.cra.service.AbsenceService;
 import com.zsoft.cra.service.dto.AbsenceDTO;
 import com.zsoft.cra.web.rest.errors.ExceptionTranslator;
@@ -21,14 +18,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static com.zsoft.cra.domain.AbsenceType.UNJUSTIFIED_ABSENCE;
 import static org.assertj.core.api.Assertions.assertThat;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -57,11 +52,12 @@ public class AbsenceResourceTest {
     @Autowired
     private ExceptionTranslator exceptionTranslator;
 
-    private MockMvc restAbsenceMockMvc;
+    private MockMvc restAbsenceCLientMockMvc;
 
-    private Absence absence;
     private LocalDate date = LocalDate.now();
+
     private static String ID = "absence";
+
     private static String COMMENT = "unjustified absence";
 
     private static String USER_LOGIN = "user";
@@ -71,7 +67,7 @@ public class AbsenceResourceTest {
 
         MockitoAnnotations.initMocks(this);
         AbsenceResource absenceResource = new AbsenceResource(absenceRepository, absenceService);
-        restAbsenceMockMvc = MockMvcBuilders.standaloneSetup(absenceResource)
+        restAbsenceCLientMockMvc = MockMvcBuilders.standaloneSetup(absenceResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
             .setMessageConverters(jacksonMessageConverter)
@@ -92,7 +88,7 @@ public class AbsenceResourceTest {
             USER_LOGIN
         );
 
-        restAbsenceMockMvc.perform(post("/api/absence")
+        restAbsenceCLientMockMvc.perform(post("/api/absence")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(absenceDTO)))
             .andExpect(status().isCreated());
@@ -102,7 +98,6 @@ public class AbsenceResourceTest {
 
         Absence testAbsence = absencesList.get(absencesList.size() - 1);
 
-        assertThat(testAbsence.getId()).isEqualTo(ID);
         assertThat(testAbsence.getBeginningDate()).isEqualTo(date);
         assertThat(testAbsence.getEndingDate()).isEqualTo(date.plus(1, ChronoUnit.DAYS));
         assertThat(testAbsence.getComment()).isEqualTo(COMMENT);
