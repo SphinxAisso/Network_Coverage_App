@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import static com.zsoft.cra.domain.AbsenceType.SICKNESS_ABSENCE;
 import static junit.framework.TestCase.assertTrue;
@@ -28,44 +29,34 @@ public class AbsenceServiceTest {
 
     private final static String USER_LOGIN = "user";
 
-    private final static LocalDate date = LocalDate.now();
+    private final static LocalDate DATE = LocalDate.now();
 
 
     @Test
     public void creatingAbsenceTest() {
 
-        Absence absence = absenceService.createAbsence(date, date.plus(1, ChronoUnit.DAYS),
+        Absence absence = absenceService.createAbsence(DATE, DATE.plus(1, ChronoUnit.DAYS),
             SICKNESS_ABSENCE, "Shit happens", USER_LOGIN);
         assertTrue("Absence created in database successfully", absenceRepository.exists(absence.getId()));
     }
 
 
     @Test
-    public void gettingAbsencesTest() {
-    /*
-        User user = new User();
-        user.setId("userAbsencesTest");
-        user.setLogin("userAbsencesLogin");
+    public void getAbsencesTest() {
 
-
-        absenceService.createAbsence(date, date.plus(1, ChronoUnit.DAYS),
+        absenceService.createAbsence(DATE, DATE.plus(1, ChronoUnit.DAYS),
             SICKNESS_ABSENCE, "Shit happens 1", USER_LOGIN);
-        absenceService.createAbsence(date, date.plus(1, ChronoUnit.DAYS),
+        absenceService.createAbsence(DATE, DATE.plus(1, ChronoUnit.DAYS),
             SICKNESS_ABSENCE, "Shit happens 2", USER_LOGIN);
-        absenceService.createAbsence(date, date.plus(1, ChronoUnit.DAYS),
+        absenceService.createAbsence(DATE, DATE.plus(1, ChronoUnit.DAYS),
             SICKNESS_ABSENCE, "Shit happens 3", USER_LOGIN);
 
 
-        List<Absence> listOfAbsences = absenceService.getAbsences("userAbsencesLogin");
+        List<Absence> userAbsences = absenceService.getAbsences("userAbsencesLogin");
 
 
-        assertTrue("Retrieving absences for user " + user.getLogin() + " successfully",
-            listOfAbsences.size() == 3);
-        for (Absence absence : listOfAbsences) {
-            assertTrue("The user login retrieved is the same saved",
-                absence.getUser().getLogin().equals(user.getLogin()));
-        }
-        */
+        assertTrue(String.format("The number of absences added for %s is 3 absences  ", USER_LOGIN), userAbsences.size() == 3);
+
 
     }
 }

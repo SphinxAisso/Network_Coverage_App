@@ -59,6 +59,6 @@ public class AbsenceService {
     }
 
     public List<Absence> getAbsences(String userLogin) {
-        return absenceRepository.findAllByUser_Login(userLogin);
+        return null;
     }
 }
