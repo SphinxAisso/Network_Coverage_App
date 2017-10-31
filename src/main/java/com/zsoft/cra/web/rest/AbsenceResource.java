@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -44,7 +43,8 @@ public class AbsenceResource {
 
     @GetMapping("/absences{userLogin}")
     public List<Absence> getAbsences(@PathVariable("userLogin") String userLogin) {
-        return new ArrayList<Absence>();
+
+        return absenceService.getAbsences(userLogin);
     }
 
 }

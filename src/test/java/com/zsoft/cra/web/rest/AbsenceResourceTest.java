@@ -22,7 +22,9 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+import static com.zsoft.cra.domain.AbsenceType.SICKNESS_ABSENCE;
 import static com.zsoft.cra.domain.AbsenceType.UNJUSTIFIED_ABSENCE;
+import static junit.framework.TestCase.assertTrue;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -58,6 +60,8 @@ public class AbsenceResourceTest {
     private LocalDate date = LocalDate.now();
 
     private static String ID = "absence";
+
+    private final static LocalDate DATE = LocalDate.now();
 
     private static String COMMENT = "unjustified absence";
 
@@ -109,10 +113,20 @@ public class AbsenceResourceTest {
     @Test
     public void getAbsences() throws Exception {
 
+        absenceService.createAbsence(DATE, DATE.plus(1, ChronoUnit.DAYS),
+            SICKNESS_ABSENCE, "Alcohol abuse and alcoholism", USER_LOGIN);
+        absenceService.createAbsence(DATE, DATE.plus(1, ChronoUnit.DAYS),
+            SICKNESS_ABSENCE, "Amputation", USER_LOGIN);
+        absenceService.createAbsence(DATE, DATE.plus(1, ChronoUnit.DAYS),
+            SICKNESS_ABSENCE, "Crohn's disease", USER_LOGIN);
+
         restAbsenceCLientMockMvc.perform(get("/api/absences")
             .param("userLogin", USER_LOGIN)
             .contentType(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk());
+
+        List<Absence> userAbsences = absenceService.getAbsences(USER_LOGIN);
+        assertTrue(String.format("the user %s has 3 absences", USER_LOGIN), userAbsences.size() == 3);
 
 
     }
