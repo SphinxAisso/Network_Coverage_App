@@ -1,6 +1,7 @@
 package com.zsoft.cra.repository;
 
 import com.zsoft.cra.domain.Absence;
+import com.zsoft.cra.domain.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +12,5 @@ import java.util.List;
  */
 @Repository
 public interface AbsenceRepository extends MongoRepository<Absence, String> {
-    List<Absence> findAllByUser_Login(String userLogin);
+    public List<Absence> findAbsencesByUser(User user);
 }

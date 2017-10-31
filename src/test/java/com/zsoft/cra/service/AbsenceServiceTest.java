@@ -52,7 +52,7 @@ public class AbsenceServiceTest {
             SICKNESS_ABSENCE, "Shit happens 3", USER_LOGIN);
 
 
-        List<Absence> userAbsences = absenceService.getAbsences("userAbsencesLogin");
+        List<Absence> userAbsences = absenceService.getAbsences(USER_LOGIN);
 
 
         assertTrue(String.format("The number of absences added for %s is 3 absences  ", USER_LOGIN), userAbsences.size() == 3);

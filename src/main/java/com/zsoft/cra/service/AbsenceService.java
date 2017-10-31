@@ -4,6 +4,7 @@ import com.zsoft.cra.domain.Absence;
 import com.zsoft.cra.domain.AbsenceType;
 import com.zsoft.cra.domain.User;
 import com.zsoft.cra.repository.AbsenceRepository;
+import com.zsoft.cra.repository.UserRepository;
 import com.zsoft.cra.service.dto.AbsenceDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,12 +20,14 @@ public class AbsenceService {
     private final Logger log = LoggerFactory.getLogger(AbsenceService.class);
 
     private final AbsenceRepository absenceRepository;
+    private final UserRepository userRepository;
 
 
     private UserService userService;
 
-    public AbsenceService(AbsenceRepository absenceRepository, UserService userService) {
+    public AbsenceService(AbsenceRepository absenceRepository, UserService userService, UserRepository userRepository) {
         this.absenceRepository = absenceRepository;
+        this.userRepository = userRepository;
         this.userService = userService;
     }
 
@@ -59,6 +62,16 @@ public class AbsenceService {
     }
 
     public List<Absence> getAbsences(String userLogin) {
-        return null;
+        // looking for the user
+        Optional<User> userOptional = userService.getUserWithAuthoritiesByLogin(userLogin);
+        if (userOptional.isPresent()) {
+            log.info(String.format("getting all absences for user:  %s", userLogin));
+            return absenceRepository.findAbsencesByUser(userOptional.get());
+        } else {
+            //TODO get the current user and affect the absence to him/her
+            log.info(String.format("could not find the user:  %s", userLogin));
+
+            return null;
+        }
     }
 }
