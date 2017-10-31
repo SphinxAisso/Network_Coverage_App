@@ -21,14 +21,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.io.IOException;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static com.zsoft.cra.domain.AbsenceType.UNJUSTIFIED_ABSENCE;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.*;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -43,10 +43,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class AbsenceResourceTest {
 
     @Autowired
-    private final AbsenceRepository absenceRepository;
+    private AbsenceRepository absenceRepository;
 
     @Autowired
-    private final AbsenceService absenceService;
+    private AbsenceService absenceService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -60,11 +60,10 @@ public class AbsenceResourceTest {
     private MockMvc restAbsenceMockMvc;
 
     private Absence absence;
-    private LocalDate date;
+    private LocalDate date = LocalDate.now();
     private static String ID = "absence";
     private static String COMMENT = "unjustified absence";
 
-    private User user;
     private static String USER_LOGIN = "user";
 
     @Before
@@ -90,7 +89,7 @@ public class AbsenceResourceTest {
             date.plus(1, ChronoUnit.DAYS),
             UNJUSTIFIED_ABSENCE,
             COMMENT,
-            user
+            USER_LOGIN
         );
 
         restAbsenceMockMvc.perform(post("/api/absence")

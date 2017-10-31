@@ -23,16 +23,16 @@ public class AbsenceDTO {
     private String comment;
 
 
-    private User user;
+    private String userLogin;
 
 
-    public AbsenceDTO(String id, LocalDate beginningDate, LocalDate endingDate, AbsenceType absenceType, String comment, User user) {
+    public AbsenceDTO(String id, LocalDate beginningDate, LocalDate endingDate, AbsenceType absenceType, String comment, String userLogin) {
         this.id = id;
         this.beginningDate = beginningDate;
         this.endingDate = endingDate;
         this.absenceType = absenceType;
         this.comment = comment;
-        this.user = user;
+        this.userLogin = userLogin;
     }
 
     public String getId() {
@@ -55,8 +55,8 @@ public class AbsenceDTO {
         return comment;
     }
 
-    public User getUser() {
-        return user;
+    public String getUserLogin() {
+        return userLogin;
     }
 
     public void setId(String id) {
@@ -79,8 +79,8 @@ public class AbsenceDTO {
         this.comment = comment;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
     @Override
@@ -91,7 +91,7 @@ public class AbsenceDTO {
             ", endingDate=" + endingDate +
             ", absenceType=" + absenceType +
             ", comment='" + comment + '\'' +
-            ", user=" + user +
+            ", userLogin=" + userLogin +
             '}';
     }
 }
