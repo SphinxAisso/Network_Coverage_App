@@ -1,7 +1,6 @@
 package com.zsoft.cra.service.dto;
 
 import com.zsoft.cra.domain.AbsenceType;
-import com.zsoft.cra.domain.User;
 
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
@@ -25,6 +24,10 @@ public class AbsenceDTO {
 
     private String userLogin;
 
+
+    public AbsenceDTO() {
+        // Empty constructor needed by mapstruct
+    }
 
     public AbsenceDTO(String id, LocalDate beginningDate, LocalDate endingDate, AbsenceType absenceType, String comment, String userLogin) {
         this.id = id;
