@@ -74,7 +74,7 @@ public class AbsenceServiceTest {
 
         absenceRepository.save(absence);
 
-        assertTrue(String.format("'%s' has been removed successfully", absence.getId()), absenceService.deleteAbsence(absence));
+        assertTrue(String.format("'%s' has been removed successfully", absence.getId()), absenceService.deleteAbsence(absence.getId()));
 
     }
 }

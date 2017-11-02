@@ -26,8 +26,7 @@ import static com.zsoft.cra.domain.AbsenceType.SICKNESS_ABSENCE;
 import static com.zsoft.cra.domain.AbsenceType.UNJUSTIFIED_ABSENCE;
 import static junit.framework.TestCase.assertTrue;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -108,10 +107,13 @@ public class AbsenceResourceTest {
         assertThat(testAbsence.getEndingDate()).isEqualTo(date.plus(1, ChronoUnit.DAYS));
         assertThat(testAbsence.getComment()).isEqualTo(COMMENT);
         assertThat(testAbsence.getUser().getLogin()).isEqualTo(USER_LOGIN);
+
     }
 
     @Test
-    public void getAbsences() throws Exception {
+    public void getAbsencesTest() throws Exception {
+
+        int databaseSizeBeforeCreate = absenceRepository.findAll().size();
 
         absenceService.createAbsence(DATE, DATE.plus(1, ChronoUnit.DAYS),
             SICKNESS_ABSENCE, "Alcohol abuse and alcoholism", USER_LOGIN);
@@ -126,7 +128,30 @@ public class AbsenceResourceTest {
             .andExpect(status().isOk());
 
         List<Absence> userAbsences = absenceService.getAbsences(USER_LOGIN);
-        assertTrue(String.format("the user %s has 3 absences", USER_LOGIN), userAbsences.size() == 3);
+        assertTrue(String.format("the user '%s' has %d absences", USER_LOGIN, databaseSizeBeforeCreate + 3), userAbsences.size() == databaseSizeBeforeCreate + 3);
+
+
+    }
+
+    @Test
+    public void deleteAbsenceTest() throws Exception {
+
+        Absence absence = new Absence();
+        absence.setId("absence-01");
+        absence.setAbsenceType(SICKNESS_ABSENCE);
+        absence.setComment("Headache");
+        absence.setEndingDate(DATE.plus(1, ChronoUnit.DAYS));
+        absence.setBeginningDate(DATE);
+
+        absenceRepository.save(absence);
+        restAbsenceCLientMockMvc.perform(delete("/api/delete_absence/{id}", absence.getId())
+            .param("id", absence.getId())
+            .contentType(TestUtil.APPLICATION_JSON_UTF8))
+            .andExpect(status().isNoContent());
+
+        boolean notFound = (absenceRepository.findById(absence.getId()) == null);
+
+        assertTrue(String.format("'%s' has been removed successfully", absence.getId()), notFound);
 
 
     }

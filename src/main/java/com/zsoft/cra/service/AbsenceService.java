@@ -75,10 +75,10 @@ public class AbsenceService {
     }
 
 
-    public Boolean deleteAbsence(Absence absence) {
+    public Boolean deleteAbsence(String absenceId) {
 
-        absenceRepository.delete(absence.getId());
-        return absenceRepository.findById(absence.getId()) == null;
+        absenceRepository.delete(absenceId);
+        return absenceRepository.findById(absenceId) == null;
 
     }
 }

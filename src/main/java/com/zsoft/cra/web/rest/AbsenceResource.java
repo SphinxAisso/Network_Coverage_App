@@ -47,4 +47,11 @@ public class AbsenceResource {
         return absenceService.getAbsences(userLogin);
     }
 
+    @RequestMapping(value = "/delete_absence/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public ResponseEntity<Absence> deleteAbsence(@PathVariable("id") String id) {
+
+        return null;
+    }
+
 }
