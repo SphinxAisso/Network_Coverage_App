@@ -173,6 +173,7 @@ public class AbsenceResourceTest {
         absence.setBeginningDate(date);
 
         User userUser = new User();
+        userUser.setId("user-3");
         userUser.setLogin(USER_LOGIN);
         absence.setUser(userUser);
 

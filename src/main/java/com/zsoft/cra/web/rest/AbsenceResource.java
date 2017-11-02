@@ -58,7 +58,11 @@ public class AbsenceResource {
 
     @PutMapping("/edit_absence")
     public ResponseEntity editAbsence(@RequestBody AbsenceDTO absenceDTO) throws URISyntaxException {
-        return null;
+
+        Absence editedAbsence = absenceService.editAbsence(absenceDTO);
+        return ResponseEntity.ok().body(editedAbsence);
+
     }
+
 
 }

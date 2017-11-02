@@ -95,4 +95,21 @@ public class AbsenceService {
             return null;
         }
     }
+
+    public Absence editAbsence(AbsenceDTO absenceDTO) {
+
+        // TODO: use absenceMapper instead
+        Absence absence = new Absence();
+        absence.setId(absenceDTO.getId());
+        absence.setComment(absenceDTO.getComment());
+        absence.setAbsenceType(absenceDTO.getAbsenceType());
+        absence.setBeginningDate(absenceDTO.getBeginningDate());
+        absence.setEndingDate(absenceDTO.getEndingDate());
+
+        User user = new User();
+        user.setLogin(absenceDTO.getId());
+        absence.setUser(user);
+
+        return editAbsence(absence);
+    }
 }
