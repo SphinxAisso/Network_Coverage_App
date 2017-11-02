@@ -27,6 +27,7 @@ public class AbsenceServiceTest {
     @Autowired
     private AbsenceService absenceService;
 
+
     private final static String USER_LOGIN = "user";
 
     private final static LocalDate DATE = LocalDate.now();
@@ -36,13 +37,17 @@ public class AbsenceServiceTest {
     public void creatingAbsenceTest() {
 
         Absence absence = absenceService.createAbsence(DATE, DATE.plus(1, ChronoUnit.DAYS),
-            SICKNESS_ABSENCE, "Shit happens", USER_LOGIN);
+            SICKNESS_ABSENCE, "Headache", USER_LOGIN);
+
         assertTrue("Absence created in database successfully", absenceRepository.exists(absence.getId()));
+
     }
 
 
     @Test
     public void getAbsencesTest() {
+
+        int absencesNbr = (int) absenceRepository.count();
 
         absenceService.createAbsence(DATE, DATE.plus(1, ChronoUnit.DAYS),
             SICKNESS_ABSENCE, "Shit happens 1", USER_LOGIN);
@@ -53,10 +58,23 @@ public class AbsenceServiceTest {
 
 
         List<Absence> userAbsences = absenceService.getAbsences(USER_LOGIN);
+        assertTrue(USER_LOGIN + "has " + userAbsences.size() + " absences", userAbsences.size() == absencesNbr + 3);
 
+    }
 
-        assertTrue(String.format("The number of absences added for %s is 3 absences  ", USER_LOGIN), userAbsences.size() == 3);
+    @Test
+    public void deleteAbsence() {
 
+        Absence absence = new Absence();
+        absence.setId("absence-01");
+        absence.setAbsenceType(SICKNESS_ABSENCE);
+        absence.setComment("Headache");
+        absence.setEndingDate(DATE.plus(1, ChronoUnit.DAYS));
+        absence.setBeginningDate(DATE);
+
+        absenceRepository.save(absence);
+
+        assertTrue(String.format("'%s' has been removed successfully", absence.getId()), absenceService.deleteAbsence(absence));
 
     }
 }

@@ -46,7 +46,7 @@ public class AbsenceService {
         if (userOptional.isPresent()) {
             absence.setUser(userOptional.get());
             absenceRepository.save(absence);
-            log.info(String.format("new absence has been added for user %s", userLogin));
+            log.info(String.format("new absence has been added for user : '%s'", userLogin));
             return absence;
         } else {
             //TODO get the current user and affect the absence to him/her
@@ -68,10 +68,16 @@ public class AbsenceService {
             log.info(String.format("getting all absences for user:  %s", userLogin));
             return absenceRepository.findAbsencesByUser(userOptional.get());
         } else {
-            //TODO get the current user and affect the absence to him/her
             log.info(String.format("could not find the user:  %s", userLogin));
 
             return null;
         }
+    }
+
+
+    public Boolean deleteAbsence(Absence absence) {
+
+        return true;
+
     }
 }
