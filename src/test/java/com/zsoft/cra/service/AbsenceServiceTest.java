@@ -77,4 +77,26 @@ public class AbsenceServiceTest {
         assertTrue(String.format("'%s' has been removed successfully", absence.getId()), absenceService.deleteAbsence(absence.getId()));
 
     }
+
+    @Test
+    public void editAbsence() {
+        Absence absence = new Absence();
+        absence.setId("absence-01");
+        absence.setAbsenceType(SICKNESS_ABSENCE);
+        absence.setComment("Headache");
+        absence.setEndingDate(DATE.plus(1, ChronoUnit.DAYS));
+        absence.setBeginningDate(DATE);
+
+        absenceRepository.save(absence);
+
+        absence.setEndingDate(DATE.plus(5, ChronoUnit.DAYS));
+
+        absenceService.editAbsence(absence);
+
+        Absence editedAbsence = absenceRepository.findById(absence.getId());
+
+        assertTrue(String.format("'%s' has been edited successfully", absence.getId()), !editedAbsence.equals(absence));
+
+
+    }
 }

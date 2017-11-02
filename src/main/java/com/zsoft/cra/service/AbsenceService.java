@@ -81,4 +81,10 @@ public class AbsenceService {
         return absenceRepository.findById(absenceId) == null;
 
     }
+
+    public Absence editAbsence(Absence absence) {
+
+        return null;
+
+    }
 }
