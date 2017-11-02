@@ -84,7 +84,15 @@ public class AbsenceService {
 
     public Absence editAbsence(Absence absence) {
 
-        return null;
-
+        String userLogin = (absence.getUser() == null) ? "" : absence.getUser().getLogin();
+        Optional<User> userOptional = userService.getUserWithAuthoritiesByLogin(userLogin);
+        if (userOptional.isPresent()) {
+            absenceRepository.save(absence);
+            log.info(String.format("'%s' absence has been edited for user : '%s'", absence, userLogin));
+            return absence;
+        } else {
+            log.info(String.format("could not find the user:  %s", userLogin));
+            return null;
+        }
     }
 }
