@@ -7,6 +7,7 @@ import com.zsoft.cra.service.dto.AbsenceDTO;
 import com.zsoft.cra.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,7 +52,8 @@ public class AbsenceResource {
     @ResponseBody
     public ResponseEntity<Absence> deleteAbsence(@PathVariable("id") String id) {
 
-        return null;
+        absenceService.deleteAbsence(id);
+        return new ResponseEntity<Absence>(HttpStatus.NO_CONTENT);
     }
 
 }
