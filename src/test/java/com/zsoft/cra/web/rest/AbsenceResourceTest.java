@@ -2,6 +2,7 @@ package com.zsoft.cra.web.rest;
 
 import com.zsoft.cra.CraApp;
 import com.zsoft.cra.domain.Absence;
+import com.zsoft.cra.domain.User;
 import com.zsoft.cra.repository.AbsenceRepository;
 import com.zsoft.cra.service.AbsenceService;
 import com.zsoft.cra.service.dto.AbsenceDTO;
@@ -143,6 +144,11 @@ public class AbsenceResourceTest {
         absence.setEndingDate(DATE.plus(1, ChronoUnit.DAYS));
         absence.setBeginningDate(DATE);
 
+        User userUser = new User();
+        userUser.setLogin("user");
+        absence.setUser(userUser);
+
+
         absenceRepository.save(absence);
         restAbsenceCLientMockMvc.perform(delete("/api/delete_absence/{id}", absence.getId())
             .param("id", absence.getId())
@@ -152,6 +158,43 @@ public class AbsenceResourceTest {
         boolean notFound = (absenceRepository.findById(absence.getId()) == null);
 
         assertTrue(String.format("'%s' has been removed successfully", absence.getId()), notFound);
+
+
+    }
+
+    @Test
+    public void editAbsenceTest() throws Exception {
+
+        Absence absence = new Absence();
+        absence.setId(ID);
+        absence.setAbsenceType(UNJUSTIFIED_ABSENCE);
+        absence.setComment(COMMENT);
+        absence.setEndingDate(date.plus(1, ChronoUnit.DAYS));
+        absence.setBeginningDate(date);
+
+        User userUser = new User();
+        userUser.setLogin(USER_LOGIN);
+        absence.setUser(userUser);
+
+        absenceRepository.save(absence);
+
+        AbsenceDTO absenceDTO = new AbsenceDTO(
+            ID,
+            date,
+            date.plus(3, ChronoUnit.DAYS),
+            SICKNESS_ABSENCE,
+            COMMENT,
+            USER_LOGIN
+        );
+
+        restAbsenceCLientMockMvc.perform(put("/api/edit_absence")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(absenceDTO)))
+            .andExpect(status().isOk());
+
+        Absence editedAbsence = absenceRepository.findById(ID);
+
+        assertTrue(String.format("'%s' has been edited successfully", ID), !editedAbsence.equals(absence));
 
 
     }

@@ -34,7 +34,7 @@ public class AbsenceResource {
     }
 
     @PostMapping("/absence")
-    public ResponseEntity createUser(@RequestBody AbsenceDTO absenceDTO) throws URISyntaxException {
+    public ResponseEntity createAbsence(@RequestBody AbsenceDTO absenceDTO) throws URISyntaxException {
 
         Absence newAbsence = absenceService.createAbsence(absenceDTO);
         return ResponseEntity.created(new URI(PREFIX + newAbsence.getAbsenceType()))
@@ -54,6 +54,11 @@ public class AbsenceResource {
 
         absenceService.deleteAbsence(id);
         return new ResponseEntity<Absence>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/edit_absence")
+    public ResponseEntity editAbsence(@RequestBody AbsenceDTO absenceDTO) throws URISyntaxException {
+        return null;
     }
 
 }
