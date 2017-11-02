@@ -77,7 +77,8 @@ public class AbsenceService {
 
     public Boolean deleteAbsence(Absence absence) {
 
-        return true;
+        absenceRepository.delete(absence.getId());
+        return absenceRepository.findById(absence.getId()) == null;
 
     }
 }

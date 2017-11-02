@@ -12,5 +12,9 @@ import java.util.List;
  */
 @Repository
 public interface AbsenceRepository extends MongoRepository<Absence, String> {
+
     public List<Absence> findAbsencesByUser(User user);
+
+    public Absence findById(String id);
+
 }
