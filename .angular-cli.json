@@ -20,7 +20,8 @@
         "mobile": false,
         "styles": [
             "content/scss/vendor.scss",
-            "content/scss/global.scss"
+            "content/scss/global.scss",
+            "../../../node_modules/font-awesome/css/font-awesome.css"
         ],
         "scripts": []
     }],
@@ -44,21 +45,21 @@
     "defaults": {
         "styleExt": "scss",
         "prefixInterfaces": false,
-        "component" : {
-            "inlineStyle" : true,
+        "component": {
+            "inlineStyle": true,
             "inlineTemplate": false,
             "spec": false
         },
-        "directive" : {
+        "directive": {
             "spec": false
         },
-        "guard" : {
+        "guard": {
             "spec": false
         },
-        "pipe" : {
+        "pipe": {
             "spec": false
         },
-        "service" : {
+        "service": {
             "spec": false
         }
     },

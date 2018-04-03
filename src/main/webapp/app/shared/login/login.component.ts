@@ -11,10 +11,11 @@ import { StateStorageService } from '../auth/state-storage.service';
     templateUrl: './login.component.html'
 })
 export class ZsLoginModalComponent implements AfterViewInit {
+
     authenticationError: boolean;
     password: string;
-    rememberMe: boolean;
     username: string;
+    rememberMe: boolean;
     credentials: any;
 
     constructor(

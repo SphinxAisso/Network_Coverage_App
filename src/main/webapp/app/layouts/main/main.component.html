@@ -1,11 +1,9 @@
-<zs-page-ribbon></zs-page-ribbon>
-<div>
-    <router-outlet name="navbar"></router-outlet>
-</div>
-<div class="container-fluid">
-    <div class="card jh-card">
-        <router-outlet></router-outlet>
+<div class="app-body">
+    <!-- Main content -->
+    <div class="main">
+        <div class="container-fluid">
+            <router-outlet></router-outlet>
+        </div>
         <router-outlet name="popup"></router-outlet>
     </div>
-    <zs-footer></zs-footer>
 </div>

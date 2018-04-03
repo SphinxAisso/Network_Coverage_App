@@ -1,3 +1,4 @@
+import { ZsLoginModule } from './zs-login/zs-login.module';
 import './vendor.ts';
 
 import { NgModule, Injector } from '@angular/core';
@@ -38,6 +39,7 @@ import {
         CraAdminModule,
         CraAccountModule,
         CraEntityModule,
+        ZsLoginModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [
