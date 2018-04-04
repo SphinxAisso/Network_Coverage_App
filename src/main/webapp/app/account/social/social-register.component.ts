@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
-import { LoginModalService } from '../../shared';
-
 @Component({
     selector: 'zs-register',
     templateUrl: './social-register.component.html'
@@ -16,8 +14,7 @@ export class SocialRegisterComponent implements OnInit  {
     modalRef: NgbModalRef;
 
     constructor(
-        private route: ActivatedRoute,
-        private loginModalService: LoginModalService
+        private route: ActivatedRoute
     ) {
     }
 
@@ -33,6 +30,6 @@ export class SocialRegisterComponent implements OnInit  {
     }
 
     login() {
-        this.modalRef = this.loginModalService.open();
+      //  this.modalRef = this.loginModalService.open();
     }
 }

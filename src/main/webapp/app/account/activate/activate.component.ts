@@ -3,7 +3,6 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 
 import { ActivateService } from './activate.service';
-import { LoginModalService } from '../../shared';
 
 @Component({
     selector: 'zs-activate',
@@ -16,7 +15,6 @@ export class ActivateComponent implements OnInit {
 
     constructor(
         private activateService: ActivateService,
-        private loginModalService: LoginModalService,
         private route: ActivatedRoute
     ) {
     }
@@ -31,9 +29,5 @@ export class ActivateComponent implements OnInit {
                 this.error = 'ERROR';
             });
         });
-    }
-
-    login() {
-        this.modalRef = this.loginModalService.open();
     }
 }

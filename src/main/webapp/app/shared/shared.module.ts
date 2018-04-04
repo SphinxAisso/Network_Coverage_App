@@ -10,8 +10,6 @@ import {
     UserService,
     StateStorageService,
     LoginService,
-    LoginModalService,
-    ZsLoginModalComponent,
     Principal,
     ZsTrackerService,
     HasAnyAuthorityDirective,
@@ -26,12 +24,10 @@ import {
     ],
     declarations: [
         ZsSocialComponent,
-        ZsLoginModalComponent,
         HasAnyAuthorityDirective
     ],
     providers: [
         LoginService,
-        LoginModalService,
         AccountService,
         StateStorageService,
         Principal,
@@ -42,11 +38,9 @@ import {
         UserService,
         DatePipe
     ],
-    entryComponents: [ZsLoginModalComponent],
     exports: [
         CraSharedCommonModule,
         ZsSocialComponent,
-        ZsLoginModalComponent,
         HasAnyAuthorityDirective,
         DatePipe
     ],

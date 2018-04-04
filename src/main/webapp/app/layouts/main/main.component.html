@@ -1,14 +1,14 @@
 <zs-page-ribbon></zs-page-ribbon>
-<div>
-    <router-outlet name="navbar"></router-outlet>
-</div>
+<router-outlet name="navbar"></router-outlet>
 <div class="app-body">
-    <!-- Main content -->
-    <div class="main">
+    <!--   <app-aside></app-aside> -->
+    <main class="main">
         <div class="container-fluid">
             <router-outlet></router-outlet>
+            <router-outlet name="popup"></router-outlet>
         </div>
-        <router-outlet name="popup"></router-outlet>
-    </div>
+        <!-- /.conainer-fluid -->
+    </main>
+    <!--   <app-aside></app-aside> -->
 </div>
 <zs-footer></zs-footer>

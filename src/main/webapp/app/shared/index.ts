@@ -13,8 +13,6 @@ export * from './language/language.constants';
 export * from './language/language.helper';
 export * from './language/find-language-from-key.pipe';
 export * from './tracker/tracker.service';
-export * from './login/login.component';
-export * from './login/login-modal.service';
 export * from './login/login.service';
 export * from './user/account.model';
 export * from './user/user.model';
