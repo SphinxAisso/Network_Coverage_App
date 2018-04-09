@@ -39,7 +39,4 @@ export class HomeComponent implements OnInit {
         return this.principal.isAuthenticated();
     }
 
-    login() {
-
-    }
 }

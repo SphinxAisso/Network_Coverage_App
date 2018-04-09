@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
 
-import { JhiLanguageHelper } from '../../shared';
+import {JhiLanguageHelper, Principal} from '../../shared';
 
 @Component({
     selector: 'zs-main',
@@ -10,6 +10,7 @@ import { JhiLanguageHelper } from '../../shared';
 export class ZsMainComponent implements OnInit {
 
     constructor(
+        private principal: Principal,
         private jhiLanguageHelper: JhiLanguageHelper,
         private router: Router
     ) {}
@@ -28,5 +29,9 @@ export class ZsMainComponent implements OnInit {
                 this.jhiLanguageHelper.updateTitle(this.getPageTitle(this.router.routerState.snapshot.root));
             }
         });
+    }
+
+    isAuthenticated() {
+        return this.principal.isAuthenticated();
     }
 }
