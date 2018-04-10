@@ -1,17 +1,12 @@
-<div>
-    <div class="row">
-        <div class="col-md-4">
-            <span class="hipster img-fluid rounded"></span>
-        </div>
-        <div class="col-md-8">
-            <h1 jhiTranslate="error.title">Error Page!</h1>
-
-            <div [hidden]="!errorMessage">
-                <div class="alert alert-danger">
-                    {{errorMessage}}
+<div class="app flex-row align-items-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="clearfix">
+                    <h1 class="float-left display-3 mr-4" [hidden]="!errorHttpCode">{{errorHttpCode}}</h1>
+                    <h4 class="pt-3" [hidden]="!errorMessage" jhiTranslate="error.message">Error</h4>
+                    <p class="text-muted" [hidden]="!errorHttpCode" jhiTranslate="error.http.403">The page you are looking for was not found.</p>
                 </div>
-            </div>
-            <div [hidden]="!errorHttpCode" class="alert alert-danger" jhiTranslate="error.http.403">You are not authorized to access this page.
             </div>
         </div>
     </div>

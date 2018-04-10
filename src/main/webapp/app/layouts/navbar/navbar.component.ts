@@ -10,10 +10,7 @@ import { VERSION } from '../../app.constants';
 
 @Component({
     selector: 'zs-navbar',
-    templateUrl: './navbar.component.html',
-    styleUrls: [
-        'navbar.scss'
-    ]
+    templateUrl: './navbar.component.html'
 })
 export class NavbarComponent implements OnInit {
     inProduction: boolean;

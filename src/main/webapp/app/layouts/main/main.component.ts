@@ -29,6 +29,13 @@ export class ZsMainComponent implements OnInit {
                 this.jhiLanguageHelper.updateTitle(this.getPageTitle(this.router.routerState.snapshot.root));
             }
         });
+
+        // Redirect to the login page if user is not logged in
+        if (!this.isAuthenticated()) {
+            this.router.navigate(['login']);
+        } else {
+            this.router.navigate(['']);
+        }
     }
 
     isAuthenticated() {
