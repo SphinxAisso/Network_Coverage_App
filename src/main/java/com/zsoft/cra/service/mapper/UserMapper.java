@@ -4,6 +4,7 @@ import com.zsoft.cra.domain.Authority;
 import com.zsoft.cra.domain.User;
 import com.zsoft.cra.service.dto.UserDTO;
 
+import com.zsoft.cra.service.util.ConverterUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -42,7 +43,7 @@ public class UserMapper {
             user.setImageUrl(userDTO.getImageUrl());
             user.setActivated(userDTO.isActivated());
             user.setLangKey(userDTO.getLangKey());
-            Set<Authority> authorities = this.authoritiesFromStrings(userDTO.getAuthorities());
+            Set<Authority> authorities = ConverterUtil.authoritiesFromStrings(userDTO.getAuthorities());
             if (authorities != null) {
                 user.setAuthorities(authorities);
             }
@@ -66,11 +67,5 @@ public class UserMapper {
         return user;
     }
 
-    public Set<Authority> authoritiesFromStrings(Set<String> strings) {
-        return strings.stream().map(string -> {
-            Authority auth = new Authority();
-            auth.setName(string);
-            return auth;
-        }).collect(Collectors.toSet());
-    }
+
 }

@@ -1,12 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { JhiLanguageService } from 'ng-jhipster';
-
-import { ProfileService } from '../profiles/profile.service';
-import { JhiLanguageHelper, Principal, LoginService } from '../../shared';
-
-import { VERSION } from '../../app.constants';
+import {Component, OnInit} from '@angular/core';
+import {NavigationEnd, Router} from '@angular/router';
+import {JhiLanguageService} from 'ng-jhipster';
+import {ProfileService} from '../profiles/profile.service';
+import {JhiLanguageHelper, LoginService, Principal} from '../../shared';
+import {VERSION} from '../../app.constants';
 
 @Component({
     selector: 'zs-navbar',
@@ -17,17 +14,14 @@ export class NavbarComponent implements OnInit {
     isNavbarCollapsed: boolean;
     languages: any[];
     swaggerEnabled: boolean;
-    modalRef: NgbModalRef;
     version: string;
 
-    constructor(
-        private loginService: LoginService,
-        private languageService: JhiLanguageService,
-        private languageHelper: JhiLanguageHelper,
-        private principal: Principal,
-        private profileService: ProfileService,
-        private router: Router
-    ) {
+    constructor(private loginService: LoginService,
+                private languageService: JhiLanguageService,
+                private languageHelper: JhiLanguageHelper,
+                private principal: Principal,
+                private profileService: ProfileService,
+                private router: Router) {
         this.version = VERSION ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
     }
@@ -41,10 +35,17 @@ export class NavbarComponent implements OnInit {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });
+
+        this.router.events.subscribe((evt) => {
+            if (!(evt instanceof NavigationEnd)) {
+                return;
+            }
+            window.scrollTo(0, 0);
+        });
     }
 
     changeLanguage(languageKey: string) {
-      this.languageService.changeLanguage(languageKey);
+        this.languageService.changeLanguage(languageKey);
     }
 
     collapseNavbar() {
@@ -56,7 +57,7 @@ export class NavbarComponent implements OnInit {
     }
 
     login() {
-     //   this.modalRef = this.loginModalService.open();
+        //   this.modalRef = this.loginModalService.open();
     }
 
     logout() {

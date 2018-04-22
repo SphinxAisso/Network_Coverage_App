@@ -1,5 +1,4 @@
 import {Component, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
-import {navigation} from '../../_nav';
 
 @Component({
     selector: 'zs-sidebar-nav',
@@ -20,7 +19,7 @@ import {navigation} from '../../_nav';
 })
 export class ZsSidebarNavComponent {
 
-    public navigation = navigation;
+    public navigation = [];
 
     public isDivider(item) {
         return item.divider ? true : false;

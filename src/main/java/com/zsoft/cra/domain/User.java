@@ -1,8 +1,7 @@
 package com.zsoft.cra.domain;
 
-import com.zsoft.cra.config.Constants;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.zsoft.cra.config.Constants;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.data.annotation.Id;
@@ -13,11 +12,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
-import java.time.Instant;
 
 /**
  * A user.
@@ -27,7 +26,6 @@ import java.time.Instant;
 public class User extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
 
     @Id
     private String id;

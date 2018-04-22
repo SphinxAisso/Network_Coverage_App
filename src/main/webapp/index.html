@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="fr" dir="ltr">
+<html>
 <head>
     <base href="./"/>
     <meta charset="utf-8">
@@ -12,35 +12,40 @@
     <link rel="manifest" href="manifest.webapp"/>
     <!-- jhipster-needle-add-resources-to-root - JHipster will add new resources here -->
 </head>
-<body>
+
+<!-- BODY options, add following classes to body to change options
+
+// Header options
+1. '.header-fixed'					- Fixed Header
+
+// Brand options
+1. '.brand-minimized'       - Minimized brand (Only symbol)
+
+// Sidebar options
+1. '.sidebar-fixed'					- Fixed Sidebar
+2. '.sidebar-hidden'				- Hidden Sidebar
+3. '.sidebar-off-canvas'		- Off Canvas Sidebar
+4. '.sidebar-minimized'			- Minimized Sidebar (Only icons)
+5. '.sidebar-compact'			  - Compact Sidebar
+
+// Aside options
+1. '.aside-menu-fixed'			- Fixed Aside Menu
+2. '.aside-menu-hidden'			- Hidden Aside Menu
+3. '.aside-menu-off-canvas'	- Off Canvas Aside Menu
+
+// Breadcrumb options
+1. '.breadcrumb-fixed'			- Fixed Breadcrumb
+
+// Footer options
+1. '.footer-fixed'					- Fixed footer
+
+-->
+
+<body class="app header-fixed sidebar-hidden footer-fixed">
 <!-- Enable bootstrap 4 theme -->
 <script>window.__theme = 'bs4';</script>
-<!--[if lt IE 9]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> to improve your experience.</p>
-<![endif]-->
 
-<noscript>
-    <h1>You must enable javascript to view this page.</h1>
-</noscript>
-<!-- uncomment this for adding service worker
-    <script>
-        if ('serviceWorker' in navigator) {
-             navigator.serviceWorker
-                .register('./sw.js')
-                .then(function() { console.log('Service Worker Registered'); });
-        }
-    </script>
--->
-<!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.
-<script>
-    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-    function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-    e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-    e.src='//www.google-analytics.com/analytics.js';
-    r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-    ga('create','UA-XXXXX-X');ga('send','pageview');
-</script>-->
-<zs-main></zs-main>
+<!-- App Loading... -->
 </body>
+
 </html>

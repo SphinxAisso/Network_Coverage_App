@@ -1,19 +1,50 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { errorRoute, navbarRoute } from './layouts';
-import { DEBUG_INFO_ENABLED } from './app.constants';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {errorRoute, NavbarComponent} from './layouts';
+import {FullLayoutComponent} from './layouts/full-layout/full-layout.component';
+import {SimpleLayoutComponent} from './layouts/simple-layout/simple-layout.component';
+import {HOME_ROUTE} from './home';
+import {LOGIN_ROUTE} from './zs-login';
+import {adminState, userDialogRoute} from './admin';
+import {accountState} from './account';
+import {employeePopupRoute, employeeRoute} from './entities/employee';
 
-const LAYOUT_ROUTES = [
-    navbarRoute,
-    ...errorRoute
+export const LAYOUT_ROUTES: Routes = [
+    {
+        path: '',
+        component: FullLayoutComponent,
+        children: [
+            HOME_ROUTE,
+            ...adminState,
+            ...accountState,
+            {
+                path: '',
+                component: NavbarComponent,
+                outlet: 'navbar'
+            },
+            ...employeeRoute,
+        ],
+
+    },
+    {
+        path: '',
+        component: SimpleLayoutComponent,
+        children: [
+            LOGIN_ROUTE,
+            ...errorRoute
+        ],
+    },
+    ...userDialogRoute,
+    ...employeePopupRoute
 ];
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(LAYOUT_ROUTES, { useHash: true , enableTracing: DEBUG_INFO_ENABLED })
+        RouterModule.forRoot(LAYOUT_ROUTES, {useHash: true})
     ],
     exports: [
         RouterModule
     ]
 })
-export class CraAppRoutingModule {}
+export class CraAppRoutingModule {
+}

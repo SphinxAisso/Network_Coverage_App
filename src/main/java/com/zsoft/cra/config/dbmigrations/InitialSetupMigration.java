@@ -1,16 +1,13 @@
 package com.zsoft.cra.config.dbmigrations;
 
+import com.github.mongobee.changeset.ChangeLog;
+import com.github.mongobee.changeset.ChangeSet;
 import com.zsoft.cra.domain.Authority;
 import com.zsoft.cra.domain.User;
 import com.zsoft.cra.security.AuthoritiesConstants;
-
-import com.github.mongobee.changeset.ChangeLog;
-import com.github.mongobee.changeset.ChangeSet;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 import java.time.Instant;
-import java.util.Arrays;
-import java.util.Collections;
 
 /**
  * Creates the initial database setup
@@ -24,8 +21,14 @@ public class InitialSetupMigration {
         adminAuthority.setName(AuthoritiesConstants.ADMIN);
         Authority userAuthority = new Authority();
         userAuthority.setName(AuthoritiesConstants.USER);
+        Authority employeeAuthority = new Authority();
+        employeeAuthority.setName(AuthoritiesConstants.EMPLOYEE);
+        Authority managerAuthority = new Authority();
+        managerAuthority.setName(AuthoritiesConstants.MANAGER);
         mongoTemplate.save(adminAuthority);
         mongoTemplate.save(userAuthority);
+        mongoTemplate.save(employeeAuthority);
+        mongoTemplate.save(managerAuthority);
     }
 
     @ChangeSet(order = "02", author = "initiator", id = "02-addUsers")
@@ -34,7 +37,12 @@ public class InitialSetupMigration {
         adminAuthority.setName(AuthoritiesConstants.ADMIN);
         Authority userAuthority = new Authority();
         userAuthority.setName(AuthoritiesConstants.USER);
+        Authority employeeAuthority = new Authority();
+        employeeAuthority.setName(AuthoritiesConstants.EMPLOYEE);
+        Authority managerAuthority = new Authority();
+        managerAuthority.setName(AuthoritiesConstants.MANAGER);
 
+        //The System user
         User systemUser = new User();
         systemUser.setId("user-0");
         systemUser.setLogin("system");
@@ -48,20 +56,8 @@ public class InitialSetupMigration {
         systemUser.setCreatedDate(Instant.now());
         systemUser.getAuthorities().add(adminAuthority);
         systemUser.getAuthorities().add(userAuthority);
+        systemUser.getAuthorities().add(managerAuthority);
         mongoTemplate.save(systemUser);
-
-        User anonymousUser = new User();
-        anonymousUser.setId("user-1");
-        anonymousUser.setLogin("anonymoususer");
-        anonymousUser.setPassword("$2a$10$j8S5d7Sr7.8VTOYNviDPOeWX8KcYILUVJBsYV83Y5NtECayypx9lO");
-        anonymousUser.setFirstName("Anonymous");
-        anonymousUser.setLastName("User");
-        anonymousUser.setEmail("anonymous@localhost");
-        anonymousUser.setActivated(true);
-        anonymousUser.setLangKey("en");
-        anonymousUser.setCreatedBy(systemUser.getLogin());
-        anonymousUser.setCreatedDate(Instant.now());
-        mongoTemplate.save(anonymousUser);
 
         User adminUser = new User();
         adminUser.setId("user-2");
@@ -76,6 +72,7 @@ public class InitialSetupMigration {
         adminUser.setCreatedDate(Instant.now());
         adminUser.getAuthorities().add(adminAuthority);
         adminUser.getAuthorities().add(userAuthority);
+        adminUser.getAuthorities().add(managerAuthority);
         mongoTemplate.save(adminUser);
 
         User userUser = new User();
@@ -91,5 +88,20 @@ public class InitialSetupMigration {
         userUser.setCreatedDate(Instant.now());
         userUser.getAuthorities().add(userAuthority);
         mongoTemplate.save(userUser);
+
+        User employerUser = new User();
+        employerUser.setId("user-4");
+        employerUser.setLogin("manager");
+        employerUser.setPassword("$2a$10$HQ6xWTISYS/Rdbq8vS5lKOE90F63d40OaivlpJ.rnIKwJ8gXdHjm6");
+        employerUser.setFirstName("");
+        employerUser.setLastName("Manager");
+        employerUser.setEmail("manager@localhost");
+        employerUser.setActivated(true);
+        employerUser.setLangKey("fr");
+        employerUser.setCreatedBy(systemUser.getLogin());
+        employerUser.setCreatedDate(Instant.now());
+        employerUser.getAuthorities().add(userAuthority);
+        employerUser.getAuthorities().add(managerAuthority);
+        mongoTemplate.save(employerUser);
     }
 }

@@ -1,22 +1,17 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
-
-import { CraSharedModule } from '../shared';
-
-import { HOME_ROUTE, HomeComponent } from './';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {CraSharedModule} from '../shared';
+import {HomeComponent} from './';
 
 @NgModule({
     imports: [
-        CraSharedModule,
-        RouterModule.forChild([ HOME_ROUTE ])
+        CraSharedModule
     ],
     declarations: [
         HomeComponent,
     ],
-    entryComponents: [
-    ],
-    providers: [
-    ],
+    entryComponents: [],
+    providers: [],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class CraHomeModule {}
+export class CraHomeModule {
+}

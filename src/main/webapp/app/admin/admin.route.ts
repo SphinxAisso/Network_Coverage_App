@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 
 import {
     auditsRoute,
@@ -8,13 +8,12 @@ import {
     logsRoute,
     metricsRoute,
     trackerRoute,
-    userMgmtRoute,
-    userDialogRoute
+    userMgmtRoute
 } from './';
 
-import { UserRouteAccessService } from '../shared';
+import {UserRouteAccessService} from '../shared';
 
-const ADMIN_ROUTES = [
+export const ADMIN_ROUTES = [
     auditsRoute,
     configurationRoute,
     docsRoute,
@@ -33,5 +32,4 @@ export const adminState: Routes = [{
     canActivate: [UserRouteAccessService],
     children: ADMIN_ROUTES
 },
-    ...userDialogRoute
 ];

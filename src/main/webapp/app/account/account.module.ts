@@ -1,31 +1,30 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
-import { CraSharedModule } from '../shared';
+import {CraSharedModule} from '../shared';
 
 import {
-    Register,
-    ActivateService,
-    PasswordService,
-    PasswordResetInitService,
-    PasswordResetFinishService,
-    SessionsService,
-    SessionsComponent,
-    PasswordStrengthBarComponent,
-    RegisterComponent,
     ActivateComponent,
+    ActivateService,
     PasswordComponent,
-    PasswordResetInitComponent,
     PasswordResetFinishComponent,
+    PasswordResetFinishService,
+    PasswordResetInitComponent,
+    PasswordResetInitService,
+    PasswordService,
+    PasswordStrengthBarComponent,
+    Register,
+    RegisterComponent,
+    SessionsComponent,
+    SessionsService,
     SettingsComponent,
-    SocialRegisterComponent,
-    accountState
+    SocialRegisterComponent
 } from './';
 
 @NgModule({
     imports: [
         CraSharedModule,
-        RouterModule.forChild(accountState)
+        RouterModule
     ],
     declarations: [
         SocialRegisterComponent,
@@ -48,4 +47,5 @@ import {
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class CraAccountModule {}
+export class CraAccountModule {
+}

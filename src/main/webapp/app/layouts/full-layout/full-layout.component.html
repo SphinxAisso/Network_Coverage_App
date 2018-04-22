@@ -1,0 +1,25 @@
+<zs-page-ribbon></zs-page-ribbon>
+<router-outlet name="navbar"></router-outlet>
+<!-- <zs-navbar></zs-navbar> -->
+<div class="app-body">
+    <!-- Sidebare nav -->
+    <!--
+    <zs-sidebar></zs-sidebar>
+    -->
+    <!-- /.Sidebare -->
+    <!-- Main content -->
+    <main class="main">
+        <!-- Breadcrumb -->
+        <ol class="breadcrumb">
+            <zs-breadcrumbs></zs-breadcrumbs>
+        </ol>
+        <!-- /.Breadcrumb -->
+        <!-- Main Conainer-fluid -->
+        <div class="container-fluid">
+            <router-outlet></router-outlet>
+        </div>
+        <!-- /Main conainer-fluid -->
+    </main>
+    <!-- /.Main content -->
+</div>
+<zs-footer></zs-footer>

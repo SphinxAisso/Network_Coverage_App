@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
-import { Account, Principal } from '../shared';
+import {Component, OnInit} from '@angular/core';
+import {JhiEventManager} from 'ng-jhipster';
+import {Account, Principal} from '../shared';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
     selector: 'zs-home',
@@ -12,12 +12,10 @@ import { Account, Principal } from '../shared';
 })
 export class HomeComponent implements OnInit {
     account: Account;
-    modalRef: NgbModalRef;
 
-    constructor(
-        private principal: Principal,
-        private eventManager: JhiEventManager
-    ) {
+    constructor(private principal: Principal,
+                private eventManager: JhiEventManager,
+                private router: Router) {
     }
 
     ngOnInit() {
@@ -25,6 +23,12 @@ export class HomeComponent implements OnInit {
             this.account = account;
         });
         this.registerAuthenticationSuccess();
+        this.router.events.subscribe((evt) => {
+            if (!(evt instanceof NavigationEnd)) {
+                return;
+            }
+            window.scrollTo(0, 0);
+        });
     }
 
     registerAuthenticationSuccess() {

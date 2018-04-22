@@ -1,19 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
-
+import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRouteSnapshot, NavigationEnd} from '@angular/router';
 import {JhiLanguageHelper, Principal} from '../../shared';
 
 @Component({
-    selector: 'zs-main',
-    templateUrl: './main.component.html'
+    selector: 'body',
+    template: '<router-outlet></router-outlet><router-outlet name="popup"></router-outlet>'
 })
 export class ZsMainComponent implements OnInit {
 
-    constructor(
-        private principal: Principal,
-        private jhiLanguageHelper: JhiLanguageHelper,
-        private router: Router
-    ) {}
+    constructor(private principal: Principal,
+                private jhiLanguageHelper: JhiLanguageHelper,
+                private router: Router) {
+    }
 
     private getPageTitle(routeSnapshot: ActivatedRouteSnapshot) {
         let title: string = (routeSnapshot.data && routeSnapshot.data['pageTitle']) ? routeSnapshot.data['pageTitle'] : 'craApp';
@@ -27,15 +25,10 @@ export class ZsMainComponent implements OnInit {
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
                 this.jhiLanguageHelper.updateTitle(this.getPageTitle(this.router.routerState.snapshot.root));
+                return;
             }
+            window.scrollTo(0, 0);
         });
-
-        // Redirect to the login page if user is not logged in
-        if (!this.isAuthenticated()) {
-            this.router.navigate(['login']);
-        } else {
-            this.router.navigate(['']);
-        }
     }
 
     isAuthenticated() {
