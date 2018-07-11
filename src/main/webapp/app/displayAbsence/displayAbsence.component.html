@@ -1,0 +1,21 @@
+<form action="/addAbsence" method="post">
+    <div>
+        <label for="debut">Date debut :</label>
+        <input type="Date" id="debut" name="date_debut">
+    </div>
+    <div>
+        <label for="fin">Date de fin :</label>
+        <input type="Date" id="fin" name="date_fin">
+    </div>
+    <div>
+        <SELECT name="typeAbsence" size="1">
+            <OPTION>Congé payé
+            <OPTION>Congé sans solde
+            <OPTION>RTT
+        </SELECT>
+    </div>
+
+    <div class="button">
+        <button type="submit">Envoyer</button>
+    </div>
+</form>
