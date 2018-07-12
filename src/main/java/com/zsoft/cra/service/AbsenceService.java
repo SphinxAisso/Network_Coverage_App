@@ -4,7 +4,9 @@ import com.zsoft.cra.domain.Absence;
 import com.zsoft.cra.service.dto.AbsenceDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AbsenceService {
 
     private final Logger log = LoggerFactory.getLogger(UserService.class);
