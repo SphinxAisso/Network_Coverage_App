@@ -1,3 +1,4 @@
+/*
 export class Absence {
     public startDate?: Date;
     public endDate?: Date;
@@ -13,3 +14,4 @@ export class Absence {
         this.type = password ? password : null;
     }
 }
+*/

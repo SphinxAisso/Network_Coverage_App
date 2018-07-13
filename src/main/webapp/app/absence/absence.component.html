@@ -1,14 +1,14 @@
-<form action="/addAbsence" method="post">
+<form name="form" role="form" (ngSubmit)="create()" #absenceForm="ngForm">
     <div>
         <label for="debut">Date debut :</label>
-        <input type="Date" id="debut" name="date_debut">
+        <input [(ngModel)]="startDate" type="Date" id="debut" name="date_debut">
     </div>
     <div>
         <label for="fin">Date de fin :</label>
-        <input type="Date" id="fin" name="date_fin">
+        <input [(ngModel)]="endDate" type="Date" id="fin" name="date_fin">
     </div>
     <div>
-        <SELECT name="typeAbsence" size="1">
+        <SELECT [(ngModel)]="typeAbsence" name="typeAbsence" size="1">
             <OPTION>Congé payé
             <OPTION>Congé sans solde
             <OPTION>RTT

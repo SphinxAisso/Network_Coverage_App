@@ -8,8 +8,8 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
-@org.springframework.data.mongodb.core.mapping.Document(collection = "zs_user")
-public class Absence extends AbstractAuditingEntity implements Serializable {
+@org.springframework.data.mongodb.core.mapping.Document(collection = "absence")
+public class Absence implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

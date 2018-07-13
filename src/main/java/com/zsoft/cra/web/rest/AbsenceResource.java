@@ -11,14 +11,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @RestController
@@ -48,13 +47,19 @@ public class AbsenceResource {
      */
     @PostMapping("/absences")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<Absence> createUser(@Valid @RequestBody AbsenceDTO absenceDTO) throws URISyntaxException {
+    public ResponseEntity<Absence> createAbsence(@Valid @RequestBody AbsenceDTO absenceDTO) throws URISyntaxException {
             log.debug("REST request to save Absence : {}", absenceDTO);
             Absence newAbsence = absenceService.createAbsence(absenceDTO);
             return ResponseEntity.created(new URI("/absence/add-absence/"))
                 .headers(HeaderUtil.createAlert( "absenceManagement.created", newAbsence.getAbsenceType()))
                 .body(newAbsence);
+    }
+
+    @GetMapping("/absences")
+    @Timed
+    public List<Absence> getAbsences() throws URISyntaxException {
+
+        return this.absenceService.getAllAbsences();
     }
 }
 

@@ -1,4 +1,5 @@
 import {Component, OnInit} from "@angular/core";
+import {AbsenceService} from "./absence.service";
 
 @Component({
     selector : 'addAbsence',
@@ -10,7 +11,24 @@ import {Component, OnInit} from "@angular/core";
 
 export class AbsenceComponent implements OnInit {
 
+    startDate: Date
+    endDate: Date
+    typeAbsence: String
+    absences: any
+
+
+
+    constructor(private absenceService : AbsenceService){
+
+    }
+
     ngOnInit() {
     }
 
+    create(){
+        this.absences = {startDate: this.startDate, endDate: this.endDate, typeAbsence: this.typeAbsence}
+        this.absenceService.create(this.absences).subscribe(() => {
+            console.log('absence create success');
+        }, (response) => console.log('absence create failed', response));
+    }
 }
