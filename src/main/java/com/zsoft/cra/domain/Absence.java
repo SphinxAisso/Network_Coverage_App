@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @org.springframework.data.mongodb.core.mapping.Document(collection = "absence")
@@ -22,20 +22,20 @@ public class Absence implements Serializable {
 
 
         @Field("start_date")
-        private Instant startDate = null;
+        private LocalDate startDate = null;
 
         @Field("end_date")
-        private Instant endDate = null;
+        private LocalDate endDate = null;
 
         @Size(max = 25)
         @Field("absenceType")
         private String absenceType;
 
-        public void setStartDate(Instant startDate) {
+        public void setStartDate(LocalDate startDate) {
             this.startDate = startDate;
         }
 
-        public void setEndDate(Instant endDate) {
+        public void setEndDate(LocalDate endDate) {
             this.endDate = endDate;
         }
 
@@ -43,11 +43,9 @@ public class Absence implements Serializable {
             this.absenceType = absenceType;
         }
 
-        public Instant getStartDate() {
-            return startDate;
-        }
+        public LocalDate getStartDate() { return startDate; }
 
-        public Instant getEndDate() {
+        public LocalDate getEndDate() {
             return endDate;
         }
 

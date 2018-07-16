@@ -1,15 +1,15 @@
 package com.zsoft.cra.service.dto;
 import com.zsoft.cra.domain.*;
 import javax.validation.constraints.Size;
-import java.time.Instant;
+import java.time.LocalDate;
 
-    /**
+/**
      * A DTO representing an absence
      */
     public class AbsenceDTO {
 
-        private Instant startDate;
-        private Instant endDate;
+        private LocalDate startDate;
+        private LocalDate endDate;
         @Size(max = 25)
         private String absenceType;
 
@@ -22,13 +22,11 @@ import java.time.Instant;
             this.absenceType = absence.getAbsenceType();
         }
 
-        public Instant getStartDate() {
+        public LocalDate getStartDate() {
             return startDate;
         }
 
-        public Instant getEndDate() {
-            return endDate;
-        }
+        public LocalDate getEndDate() { return endDate; }
 
         public String getAbsenceType() {
             return absenceType;

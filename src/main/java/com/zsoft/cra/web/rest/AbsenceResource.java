@@ -62,8 +62,3 @@ public class AbsenceResource {
         return this.absenceService.getAllAbsences();
     }
 }
-
-
-
-
-
