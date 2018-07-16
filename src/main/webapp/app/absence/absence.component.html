@@ -8,11 +8,11 @@
         <input [(ngModel)]="endDate" type="Date" id="fin" name="date_fin">
     </div>
     <div>
-        <SELECT [(ngModel)]="typeAbsence" name="typeAbsence" size="1">
-            <OPTION>Congé payé
-            <OPTION>Congé sans solde
-            <OPTION>RTT
-        </SELECT>
+        <select [(ngModel)]="absenceType" name="typeAbsence">
+            <option value="Congé Payé">Congé payé</option>
+            <option value="Congé Sans Solde">Congé sans solde</option>
+            <option value="RTT">RTT</option>
+        </select>
     </div>
 
     <div class="button">

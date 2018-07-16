@@ -1,6 +1,5 @@
 package com.zsoft.cra.service.dto;
 import com.zsoft.cra.domain.*;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 /**
@@ -10,7 +9,6 @@ import java.time.LocalDate;
 
         private LocalDate startDate;
         private LocalDate endDate;
-        @Size(max = 25)
         private String absenceType;
 
         public AbsenceDTO() {
@@ -22,15 +20,11 @@ import java.time.LocalDate;
             this.absenceType = absence.getAbsenceType();
         }
 
-        public LocalDate getStartDate() {
-            return startDate;
-        }
+        public LocalDate getStartDate() { return startDate; }
 
         public LocalDate getEndDate() { return endDate; }
 
-        public String getAbsenceType() {
-            return absenceType;
-        }
+        public String getAbsenceType() { return absenceType; }
 
         @Override
         public String toString() {

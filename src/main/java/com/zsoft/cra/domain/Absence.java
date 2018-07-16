@@ -1,14 +1,13 @@
 package com.zsoft.cra.domain;
 
 
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@org.springframework.data.mongodb.core.mapping.Document(collection = "absence")
+@Document(collection = "absence")
 public class Absence implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,9 +26,8 @@ public class Absence implements Serializable {
         @Field("end_date")
         private LocalDate endDate = null;
 
-        @Size(max = 25)
-        @Field("absenceType")
-        private String absenceType;
+        @Field("absence_Type")
+        private String absenceType = null;
 
         public void setStartDate(LocalDate startDate) {
             this.startDate = startDate;
@@ -49,9 +47,7 @@ public class Absence implements Serializable {
             return endDate;
         }
 
-        public String getAbsenceType() {
-            return absenceType;
-        }
+        public String getAbsenceType() { return absenceType; }
 
     @Override
     public boolean equals(Object o) {

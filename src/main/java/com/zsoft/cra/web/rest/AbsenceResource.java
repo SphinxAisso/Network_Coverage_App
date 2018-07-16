@@ -31,10 +31,8 @@ public class AbsenceResource {
     private final AbsenceService absenceService;
 
     public AbsenceResource(AbsenceRepository absenceRepository, AbsenceService absenceService) {
-
         this.absenceRepository = absenceRepository;
         this.absenceService = absenceService;
-
     }
 
     /**

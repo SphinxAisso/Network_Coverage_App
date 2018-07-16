@@ -13,7 +13,7 @@ export class AbsenceComponent implements OnInit {
 
     startDate: Date
     endDate: Date
-    typeAbsence: String
+    absenceType: String
     absences: any
 
 
@@ -26,9 +26,10 @@ export class AbsenceComponent implements OnInit {
     }
 
     create(){
-        this.absences = {startDate: this.startDate, endDate: this.endDate, typeAbsence: this.typeAbsence}
+        this.absences = {startDate: this.startDate, endDate: this.endDate, absenceType: this.absenceType};
         this.absenceService.create(this.absences).subscribe(() => {
             console.log('absence create success');
         }, (response) => console.log('absence create failed', response));
     }
+
 }

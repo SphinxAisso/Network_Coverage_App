@@ -17,14 +17,14 @@ import java.util.stream.Collectors;
 @Service
 public class AbsenceMapper {
 
-    public AbsenceDTO userToUserDTO(Absence absence) {
+    public AbsenceDTO absenceToAbsenceDTO(Absence absence) {
         return new AbsenceDTO(absence);
     }
 
     public List<AbsenceDTO> absencesToAbsenceDTOs(List<Absence> absences) {
         return absences.stream()
             .filter(Objects::nonNull)
-            .map(this::userToUserDTO)
+            .map(this::absenceToAbsenceDTO)
             .collect(Collectors.toList());
     }
 

@@ -22,9 +22,10 @@ public class AbsenceService {
 
     public Absence createAbsence(AbsenceDTO absenceDTO) {
         Absence absence = new Absence();
-        absence.setAbsenceType(absenceDTO.getAbsenceType());
         absence.setStartDate(absenceDTO.getStartDate());
         absence.setEndDate(absenceDTO.getEndDate());
+        absence.setAbsenceType(absenceDTO.getAbsenceType());
+        this.absenceRepository.save(absence);
         log.debug("Created Information for Absence: {}", absence);
         return absence;
     }
