@@ -26,12 +26,9 @@ export class AbsenceComponent implements OnInit {
     }
 
     create(){
-        console.log('absence creation 1 ...');
         this.absences = {startDate: this.startDate, endDate: this.endDate, typeAbsence: this.typeAbsence}
-        console.log('absence creation 2 ...'+ this.absences.startDate);
         this.absenceService.create(this.absences).subscribe(() => {
             console.log('absence create success');
         }, (response) => console.log('absence create failed', response));
-        console.log('absence creation 3 created!');
     }
 }

@@ -25,7 +25,7 @@ public class AbsenceService {
         absence.setAbsenceType(absenceDTO.getAbsenceType());
         absence.setStartDate(absenceDTO.getStartDate());
         absence.setEndDate(absenceDTO.getEndDate());
-        log.debug("Created Information for User: {}", absence);
+        log.debug("Created Information for Absence: {}", absence);
         return absence;
     }
 
