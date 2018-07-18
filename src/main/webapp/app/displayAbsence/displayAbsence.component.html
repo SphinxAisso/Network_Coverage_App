@@ -1,9 +1,15 @@
 <div>
     <h2>
         <span>Absences</span>
-        <button class="btn btn-primary float-right" [routerLink]="['/addAbsence']">
-            <span class="fa fa-refresh"></span> <span>Ajouter une absence</span>
+        <div><button class="btn btn-primary float-right" [routerLink]="['/addAbsence']">
+            <span class="fa fa-edit"></span> <span>Ajouter une absence</span>
+        </button></div>
+
+        <div>
+        <button class="btn btn-dark float-right" (click)="getAbsence()">
+            <span class="fa fa-refresh"></span> <span>Refresh</span>
         </button>
+        </div>
     </h2>
     <div class="table-responsive">
         <table class="table table-striped">
@@ -15,12 +21,11 @@
             </tr>
             </thead>
             <tbody>
-            <!--<tr *ngFor="let absence of absences">
+            <tr *ngFor="let absence of absences">
                 <td>{{absence.startDate}}</td>
                 <td>{{absence.endDate}}</td>
                 <td>{{absence.absenceType}}</td>
             </tr>
-            -->
             </tbody>
         </table>
     </div>

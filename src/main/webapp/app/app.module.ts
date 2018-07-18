@@ -29,6 +29,7 @@ import {
     ActiveMenuDirective,
     ErrorComponent
 } from './layouts';
+import {AbsenceModule} from "./absence/absence.module";
 
 @NgModule({
     imports: [
@@ -40,7 +41,8 @@ import {
         CraAdminModule,
         CraAccountModule,
         CraEntityModule,
-        DisplayAbsenceModule
+        DisplayAbsenceModule,
+        AbsenceModule
 
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],

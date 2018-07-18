@@ -9,7 +9,7 @@ import {DisplayAbsenceComponent} from "./displayAbsence.component";
         RouterModule.forChild([ ABSENCES_ROUTE ])
     ],
     declarations: [
-        DisplayAbsenceComponent
+
     ],
     entryComponents: [
     ],

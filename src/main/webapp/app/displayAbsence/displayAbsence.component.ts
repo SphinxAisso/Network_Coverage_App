@@ -1,6 +1,13 @@
 import {Component, OnInit} from "@angular/core";
 import {DisplayAbsenceService} from "./displayAbsence.service";
 
+class absence {
+    startDate: Date;
+    endDate: Date;
+    absenceType: String;
+
+}
+
 @Component({
     selector : 'displayAbsence',
     templateUrl : './displayAbsence.component.html',
@@ -10,23 +17,22 @@ import {DisplayAbsenceService} from "./displayAbsence.service";
 
 export class DisplayAbsenceComponent implements OnInit {
 
-    absences : { startDate: Date, endDate: Date, absenceType: String }
 
+    absences : Array<absence>
 
-    constructor(private displayabsenceService : DisplayAbsenceService){
+    constructor(private displayAbsenceService : DisplayAbsenceService){
 
     }
 
     ngOnInit() {
-        this.getAbsence();
+         this.getAbsence();
     }
 
     getAbsence(){
-        this.displayabsenceService.getAbsence().subscribe((absence) => {
-            console.log('absence get success');
-            this.absences.startDate = absence.startDate;
-            this.absences.endDate = absence.endDate;
-            this.absences.absenceType = absence.absenceType;
+        this.displayAbsenceService.getAbsence().subscribe((absencesJson) => {
+            console.log('absence get success ', absencesJson);
+            this.absences = absencesJson;
+
         }, (response) => console.log('absence get failed', response));
 
     }

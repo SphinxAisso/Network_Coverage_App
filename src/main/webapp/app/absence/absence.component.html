@@ -1,4 +1,6 @@
-<form name="form" role="form" (ngSubmit)="create()" #absenceForm="ngForm">
+<!--
+<form name="form" role="form" #absenceForm="ngForm">
+-->
     <div>
         <label for="debut">Date debut :</label>
         <input [(ngModel)]="startDate" type="Date" id="debut" name="date_debut">
@@ -16,6 +18,6 @@
     </div>
 
     <div class="button">
-        <button type="submit">Envoyer</button>
+        <button (click)="create()" [routerLink]="['/']">Envoyer</button>
     </div>
-</form>
+<!--</form>-->
