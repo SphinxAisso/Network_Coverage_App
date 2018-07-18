@@ -1,21 +1,27 @@
-<form action="/addAbsence" method="post">
-    <div>
-        <label for="debut">Date debut :</label>
-        <input type="Date" id="debut" name="date_debut">
+<div>
+    <h2>
+        <span>Absences</span>
+        <button class="btn btn-primary float-right" [routerLink]="['/addAbsence']">
+            <span class="fa fa-refresh"></span> <span>Ajouter une absence</span>
+        </button>
+    </h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Date debut</th>
+                <th class="text-center">Date fin</th>
+                <th class="text-center">type d absence</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--<tr *ngFor="let absence of absences">
+                <td>{{absence.startDate}}</td>
+                <td>{{absence.endDate}}</td>
+                <td>{{absence.absenceType}}</td>
+            </tr>
+            -->
+            </tbody>
+        </table>
     </div>
-    <div>
-        <label for="fin">Date de fin :</label>
-        <input type="Date" id="fin" name="date_fin">
-    </div>
-    <div>
-        <SELECT name="typeAbsence" size="1">
-            <OPTION>Congé payé
-            <OPTION>Congé sans solde
-            <OPTION>RTT
-        </SELECT>
-    </div>
-
-    <div class="button">
-        <button type="submit">Envoyer</button>
-    </div>
-</form>
+</div>
