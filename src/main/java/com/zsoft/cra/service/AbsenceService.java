@@ -6,8 +6,8 @@ import com.zsoft.cra.service.dto.AbsenceDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AbsenceService {
@@ -34,4 +34,24 @@ public class AbsenceService {
         return this.absenceRepository.findAll();
     }
 
+
+    /**
+     * Update all information for a specific absence, and return the modified absence.
+     *
+     * @param absenceDTO absence to update
+     * @return updated absence
+     */
+    public Optional<AbsenceDTO> updateAbsence(AbsenceDTO absenceDTO) {
+        return Optional.of(absenceRepository
+            .findOne(absenceDTO.getId()))
+            .map(absence -> {
+                absence.setStartDate(absenceDTO.getStartDate());
+                absence.setEndDate(absenceDTO.getEndDate());
+                absence.setAbsenceType(absenceDTO.getAbsenceType());
+                absenceRepository.save(absence);
+                log.debug("Changed Information for Absence: {}", absence);
+                return absence;
+            })
+            .map(AbsenceDTO::new);
+    }
 }

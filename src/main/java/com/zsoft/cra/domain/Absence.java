@@ -1,8 +1,10 @@
 package com.zsoft.cra.domain;
 
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -20,6 +22,9 @@ public class Absence implements Serializable {
 
 
 
+        @Id
+        private String id;
+
         @Field("start_date")
         private LocalDate startDate = null;
 
@@ -28,6 +33,12 @@ public class Absence implements Serializable {
 
         @Field("absence_Type")
         private String absenceType = null;
+
+
+
+        public void setId(String id) {
+        this.id = id;
+        }
 
         public void setStartDate(LocalDate startDate) {
             this.startDate = startDate;
@@ -39,6 +50,10 @@ public class Absence implements Serializable {
 
         public void setAbsenceType(String absenceType) {
             this.absenceType = absenceType;
+        }
+
+        public String getId() {
+        return id;
         }
 
         public LocalDate getStartDate() { return startDate; }

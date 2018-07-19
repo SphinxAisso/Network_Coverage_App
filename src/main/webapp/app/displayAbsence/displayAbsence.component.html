@@ -1,6 +1,6 @@
 <div>
     <h2>
-        <span>Absences</span>
+        <span>Liste des absences :</span>
         <div><button class="btn btn-primary float-right" [routerLink]="['/addAbsence']">
             <span class="fa fa-edit"></span> <span>Ajouter une absence</span>
         </button></div>
@@ -15,16 +15,43 @@
         <table class="table table-striped">
             <thead>
             <tr>
+                <th>Id</th>
                 <th>Date debut</th>
-                <th class="text-center">Date fin</th>
-                <th class="text-center">type d absence</th>
+                <th>Date fin</th>
+                <th>Type d'absence</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let absence of absences">
+                <td>{{absence.id}}</td>
                 <td>{{absence.startDate}}</td>
                 <td>{{absence.endDate}}</td>
                 <td>{{absence.absenceType}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../absence/', absence.id]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'absences/'+ absence.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'absences/'+ absence.id + '/delete'} }]"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
             </tr>
             </tbody>
         </table>

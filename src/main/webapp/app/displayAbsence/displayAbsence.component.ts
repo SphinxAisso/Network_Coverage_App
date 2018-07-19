@@ -1,12 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {DisplayAbsenceService} from "./displayAbsence.service";
+import {Absence} from "./absence";
 
-class absence {
-    startDate: Date;
-    endDate: Date;
-    absenceType: String;
 
-}
 
 @Component({
     selector : 'displayAbsence',

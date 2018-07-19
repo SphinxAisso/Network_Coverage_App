@@ -7,6 +7,7 @@ import java.time.LocalDate;
      */
     public class AbsenceDTO {
 
+        private String id;
         private LocalDate startDate;
         private LocalDate endDate;
         private String absenceType;
@@ -20,13 +21,22 @@ import java.time.LocalDate;
             this.absenceType = absence.getAbsenceType();
         }
 
+        public String getId() {
+        return id;
+    }
+
+        public void setId(String id) {
+        this.id = id;
+    }
+
         public LocalDate getStartDate() { return startDate; }
 
         public LocalDate getEndDate() { return endDate; }
 
         public String getAbsenceType() { return absenceType; }
 
-        @Override
+
+    @Override
         public String toString() {
             return "AbsenceDTO{" +
                 "startDate=" + startDate +

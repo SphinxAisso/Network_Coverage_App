@@ -3,21 +3,20 @@ package com.zsoft.cra.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.zsoft.cra.domain.Absence;
 import com.zsoft.cra.repository.AbsenceRepository;
-import com.zsoft.cra.security.AuthoritiesConstants;
 import com.zsoft.cra.service.AbsenceService;
 import com.zsoft.cra.service.dto.AbsenceDTO;
 import com.zsoft.cra.web.rest.util.HeaderUtil;
+import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -59,4 +58,20 @@ public class AbsenceResource {
 
         return this.absenceService.getAllAbsences();
     }
+
+
+    /**
+     * PUT /absences : Updates an existing Absence.
+     *
+     * @param absenceDTO the absence to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated absence
+     */
+    @PutMapping("/absences")
+    public ResponseEntity<AbsenceDTO> updateAbsence(@Valid @RequestBody AbsenceDTO absenceDTO) {
+        log.debug("REST request to update absence : {}", absenceDTO);
+        Optional<AbsenceDTO> updatedAbsence = absenceService.updateAbsence(absenceDTO);
+        return ResponseUtil.wrapOrNotFound(updatedAbsence,
+            HeaderUtil.createAlert("absence.updated", absenceDTO.getId()));
+    }
+
 }
