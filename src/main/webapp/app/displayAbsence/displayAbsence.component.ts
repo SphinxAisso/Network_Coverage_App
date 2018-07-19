@@ -1,20 +1,20 @@
 import {Component, OnInit} from "@angular/core";
 import {DisplayAbsenceService} from "./displayAbsence.service";
-import {Absence} from "./absence";
+import {Absence} from "./absence.model";
 
 
 
 @Component({
     selector : 'displayAbsence',
     templateUrl : './displayAbsence.component.html',
-    styleUrls : ['./displayAbsence.scss']
+    styleUrls : ['./displayAbsence.scss'],
+    providers: [DisplayAbsenceService]
 })
-
 
 export class DisplayAbsenceComponent implements OnInit {
 
 
-    absences : Array<absence>
+    absences : Array<Absence>
 
     constructor(private displayAbsenceService : DisplayAbsenceService){
 

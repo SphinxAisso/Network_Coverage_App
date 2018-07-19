@@ -1,4 +1,4 @@
-class absence {
+export class Absence {
 
     public id? : string;
     public startDate? : Date;
